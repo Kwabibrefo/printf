@@ -9,35 +9,38 @@
  * Return: returns count of chars printed except null byte
  */
 
-int _printf(const char *format, ...);
+int _printf(const char *format, ...)
 {
-	va_list ap;
 	int counter;
+	const char *ptr;
+	int i;
+	va_list ap;
 
-	va_start(ap, counter);
-	for (format; *format; format++)
+	va_start(ap, format);
+
+	for (ptr = format; *ptr; ptr++)
 	{
-		if (*format == %)
+		if (*ptr == '%')
 		{
-			format++;
-			 if (*format == 'c')
+			ptr++;
+			 if (*ptr == 'c')
 			 {
 				 char c = va_arg(ap, int);
-				 putchar('c')
-				 count++;
+				 putchar(c);
+				 counter++;
 			 }
-			 if (*format == %)
+			 if (*ptr == '%')
 			 {
 				 putchar(37);
-				 count++;
+				 counter++;
 			 }
-			 if (*format == s)
+			 if (*ptr == 's')
 			 {
-				 char *str = va_arg(args, char *);
+				 char *str = va_arg(ap, char *);
 				 for (i = 0; str[i] != '\0'; i++)
 				 {
-					 putchar('str[i]');
-					 count++;
+					 putchar(str[i]);
+					 counter++;
 				 }
 			 }
 			else
@@ -47,10 +50,11 @@ int _printf(const char *format, ...);
 		}
 		else
 		{
-			write(STDOUT_FILENO, format, 1);
-			count++;
+			putchar(*ptr);
+			ptr++;
+			counter++;
 		}
-		va_end (ap);
-		return (count);
 	}
+		va_end(ap);
+		return (counter);
 }
