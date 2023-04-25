@@ -1,7 +1,4 @@
-#include <stdio.h>
-#include <stdarg.h>
 #include "main.h"
-#include <stdarg.h>
 
 /**
  * _printf - function to print strings
@@ -11,9 +8,8 @@
 
 int _printf(const char *format, ...)
 {
-	int counter;
+	int counter, i;
 	const char *ptr;
-	int i;
 	va_list ap;
 
 	va_start(ap, format);
@@ -23,34 +19,34 @@ int _printf(const char *format, ...)
 		if (*ptr == '%')
 		{
 			ptr++;
-			 if (*ptr == 'c')
-			 {
-				 char c = va_arg(ap, int);
-				 putchar(c);
-				 counter++;
-			 }
-			 if (*ptr == '%')
-			 {
-				 putchar(37);
-				 counter++;
-			 }
-			 if (*ptr == 's')
-			 {
-				 char *str = va_arg(ap, char *);
-				 for (i = 0; str[i] != '\0'; i++)
-				 {
-					 putchar(str[i]);
-					 counter++;
-				 }
-			 }
-			else
+			if (*ptr == 'c')
 			{
-				return (-1);
+				char c = va_arg(ap, int);
+
+				putchar(c);
+				counter++;
 			}
+			else if (*ptr == '%')
+			{
+				putchar('%');
+				counter++;
+			}
+			else if (*ptr == 's')
+			{
+				char *str = va_arg(ap, char *);
+
+				for (i = 0; str[i] != '\0'; i++)
+				{
+					putchar(str[i]);
+					counter++;
+				}
+			}
+			else
+				return (-1);
 		}
 		else
 		{
-			putchar(*ptr);
+			putchar(ptr);
 			ptr++;
 			counter++;
 		}
