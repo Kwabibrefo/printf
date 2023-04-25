@@ -46,7 +46,7 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
-			putchar(ptr);
+			putchar(*ptr);
 			ptr++;
 			counter++;
 		}
