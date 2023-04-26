@@ -8,11 +8,11 @@
 
 int _printf(const char *format, ...)
 {
-	int counter, i;
+	int counter;
 	const char *ptr;
 	va_list ap;
 	va_start(ap, format);
-
+	
 	for (ptr = format; *ptr; ptr++)
 	{
 		if (*ptr != '%')
@@ -22,33 +22,25 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
-			ptr++;
-			if (*ptr == 'c')
+			counter++;
+			if (*ptr == 'd')
 			{
-				char c = va_arg(ap, int);
-
-				putchar(c);
+				int d = va_arg(ap, int);
+				putchar(d + '0');
 				counter++;
 			}
-			else if (*ptr == '%')
+			else if(*ptr == 'i')
 			{
-				putchar('%');
+				int i = va_arg(ap, int);
+				putchar(i + '0');
 				counter++;
-			}
-			else if (*ptr == 's')
-			{
-				char *str = va_arg(ap, char *);
-
-				for (i = 0; str[i] != '\0'; i++)
-				{
-					putchar(str[i]);
-					counter++;
-				}
 			}
 			else
-				return (-1);
+			{
+				putchar(*ptr);
+				counter++;
+			}
 		}
 	}
-		va_end(ap);
-		return (counter);
+	return (counter);
 }
