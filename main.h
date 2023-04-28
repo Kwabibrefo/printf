@@ -68,16 +68,16 @@ int print_number_left_shift(char *str, params_t *params);
 */
 typedef struct parameters
 {
-unsigned int unsign :1;
-unsigned int plus_flag :1;
-unsigned int space_flag :1;
-unsigned int hashtag_flag :1;
-unsigned int zero_flag :1;
-unsigned int minus_flag :1;
-unsigned int h_modifier :1;
-unsigned int l_modifier :1;
-unsigned int width;
-unsigned int percision;
+	unsigned int unsign		: 1;
+	unsigned int plus_flag		: 1;
+	unsigned int space_flag		: 1;
+	unsigned int hashtag_flag	: 1;
+	unsigned int zero_flag		: 1;
+	unsigned int minus_flag		: 1;
+	unsigned int h_modifier		: 1;
+	unsigned int l_modifier		: 1;
+	unsigned int width;
+	unsigned int percision;
 } params_t;
 
 /**
