@@ -74,7 +74,7 @@ i++;
 if (neg && pad == '0')
 n += _putchar('-');
 if (params->plus_flag && !neg1 && pad == '0' && !params->unsign)
-n += _putchar(+);
+n += _putchar('+');
 else if (!params->plus_flag && params->space_flag && !neg1 &&
 !params->unsign && params->zero_flag)
 n += _putchar(' ');
