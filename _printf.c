@@ -10,46 +10,42 @@ int _printf(const char *format, ...)
 {
 	int counter, i;
 	const char *ptr;
+	char *start;
 	va_list ap;
-
+	params_t params = PARAMS_INIT;
+	
 	va_start(ap, format);
 
+	if (!format || (format[0] == '%' && !format[1]))
+		return (-1);
+	if (format[0] == '%' && format[1] == ' ' && !format[2])
+		return (-1);
+	
 	for (ptr = format; *ptr; ptr++)
 	{
-		if (*ptr == '%')
+		init_params(&params, ap);
+		if (*ptr != '%')
+		{
+			counter += _putchar(*ptr);
+			continue;
+		}
+		start = ptr;
+		ptr++;
+		while (get_flag(ptr, &params))
 		{
 			ptr++;
-			if (*ptr == 'c')
-			{
-				char c = va_arg(ap, int);
-
-				putchar(c);
-				counter++;
-			}
-			else if (*ptr == '%')
-			{
-				putchar('%');
-				counter++;
-			}
-			else if (*ptr == 's')
-			{
-				char *str = va_arg(ap, char *);
-
-				for (i = 0; str[i] != '\0'; i++)
-				{
-					putchar(str[i]);
-					counter++;
-				}
-			}
-			else
-				return (-1);
 		}
+		ptr = get_width(ptr, &params, ap);
+		ptr = get_precision(ptr, &params, ap);
+		if (get_modifier(p, &params))
+			ptr++;
+		if (!get_specifier(ptr))
+			counter += print_from_to(start, ptr,
+						 params.l_modifier || params.h_modifier ? p - 1 : 0);
 		else
-		{
-			putchar(*ptr);
-			counter++;
-		}
+			counter += get_print_func(p, ap, &params);
 	}
-		va_end(ap);
-		return (counter);
+	_putchar(BUF_FLUSH);
+	va_end(ap);
+	return (counter);
 }
