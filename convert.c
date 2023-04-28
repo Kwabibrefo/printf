@@ -49,7 +49,7 @@ l = (unsigned short int)va_arg(ap, unsigned int);
 else
 l = (unsigned int)va_arg(ap, unsigned int);
 params->unsign = 1;
-return (number_print(convert(1, 10, CONVERT_UNSIGNED, params), params));
+return (number_print(convert(l, 10, CONVERT_UNSIGNED, params), params));
 }
 
 /**
