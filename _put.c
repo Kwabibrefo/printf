@@ -24,7 +24,7 @@ static char buf[OUTPUT_BUF_SIZE];
 if (c == BUF_FLUSH || j >= OUTPUT_BUF_SIZE)
 {
 write(1, buf, j);
-i = 0;
+j = 0;
 }
 if (c != BUF_FLUSH)
 buf[j++] = c;
