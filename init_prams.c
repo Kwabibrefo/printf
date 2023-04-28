@@ -14,7 +14,7 @@ params->hashtag_flag = 0;
 params->zero_flag = 0;
 params->minus_flag = 0;
 params->width = 0;
-params->percision = UNIT_MAX;
+params->percision = UINT_MAX;
 params->h_modifier = 0;
 params->l_modifier = 0;
 (void)ap;
