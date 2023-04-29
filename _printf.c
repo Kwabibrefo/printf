@@ -1,7 +1,4 @@
-+#include <stdio.h>
-#include <stdarg.h>
 #include "main.h"
-#include <stdarg.h>
 
 /**
  * _printf - function to print strings
@@ -9,48 +6,50 @@
  * Return: returns count of chars printed except null byte
  */
 
-int _printf(const char *format, ...);
+int _printf(const char *format, ...)
 {
+	int counter, i;
+	const char *ptr;
 	va_list ap;
-	int counter;
 
-	va_start(ap, counter);
-	for (format; *format; format++)
+	va_start(ap, format);
+
+	for (ptr = format; *ptr; ptr++)
 	{
-		if (*format == %)
+		if (*ptr == '%')
 		{
-			format++;
-			 if (*format == 'c')
-			 {
-				 char c = va_arg(ap, int);
-				 putchar('c')
-				 count++;
-			 }
-			 if (*format == %)
-			 {
-				 putchar(37);
-				 count++;
-			 }
-			 if (*format == s)
-			 {
-				 char *str = va_arg(args, char *);
-				 for (i = 0; str[i] != '\0'; i++)
-				 {
-					 putchar('str[i]');
-					 count++;
-				 }
-			 }
-			else
+			ptr++;
+			if (*ptr == 'c')
 			{
-				return (-1);
+				char c = va_arg(ap, int);
+
+				putchar(c);
+				counter++;
 			}
+			else if (*ptr == '%')
+			{
+				putchar('%');
+				counter++;
+			}
+			else if (*ptr == 's')
+			{
+				char *str = va_arg(ap, char *);
+
+				for (i = 0; str[i] != '\0'; i++)
+				{
+					putchar(str[i]);
+					counter++;
+				}
+			}
+			else
+				return (-1);
 		}
 		else
 		{
-			write(STDOUT_FILENO, format, 1);
-			count++;
+			putchar(*ptr);
+			counter++;
 		}
-		va_end (ap);
-		return (count);
 	}
+		va_end(ap);
+		return (counter);
 }
